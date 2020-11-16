@@ -5,8 +5,12 @@
  */
 package com.park.parkinglot.servlet;
 
+import com.park.parkinglot.common.CarDetails;
+import com.park.parkinglot.ejb.CarBean;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Cars", urlPatterns = {"/Cars"})
 public class Cars extends HttpServlet {
+    
+    @Inject
+    private CarBean carbean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,7 +66,12 @@ public class Cars extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
+        request.setAttribute("activePage", "Cars");
         request.setAttribute("numberOfFreeParkingSpots", 10);
+        
+        List<CarDetails> cars= carbean.getAllCars();
+        request.setAttribute("cars", cars);
+        
         request.getRequestDispatcher("/WEB-INF/pages/cars.jsp").forward(request, response);
     }
 
