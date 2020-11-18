@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.parking.parkinglot.ejb;
+package com.park.parkinglot.ejb;
 
 import com.park.parkinglot.common.UserDetails;
 import com.park.parkinglot.entity.User;
@@ -15,6 +15,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+
 
 /**
  *
@@ -31,7 +32,7 @@ public class UserBean {
     public List<UserDetails> getAllUsers() {
         LOG.info("getAllUsers");
     try {
-        Query query=em.createQuery("SELECT c FROM Car c");
+        Query query=em.createQuery("SELECT u FROM User u");
         List<User>users=(List<User>) query.getResultList();
         return copyUsersToDetails(users);
     }  catch (Exception ex) {
@@ -53,4 +54,3 @@ public class UserBean {
     }
 
 }
-

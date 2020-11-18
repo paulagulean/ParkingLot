@@ -6,16 +6,6 @@
 package com.park.parkinglot.common;
 
 
-import com.park.parkinglot.entity.User;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-import javax.ejb.EJBException;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
 /**
  *
  * @author GI
