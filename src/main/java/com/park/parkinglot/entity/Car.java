@@ -6,6 +6,7 @@
 package com.park.parkinglot.entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,51 +15,54 @@ import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+
 /**
  *
  * @author GI
  */
 @Entity
-@Table(name="CARS")
+@Table(name = "CARS")
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
-         private String licensePlate;
-     private String parkingSpot;
-     
-     @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "USER_KEY")
-     private User user;
-     
-     
-     public String getLicensePlate(){
-         return licensePlate;
-     }
-     
-     public void setLicensePlate(String licensePlate){
-         this.licensePlate = licensePlate; 
-     }
-     
-       public String getParkingSpot(){
-         return parkingSpot;
-     }
-     
-     public void setParkingSpot(String parkingSpot){
-         this.parkingSpot = parkingSpot; 
-     }
-     
-     public User getUser() {
-         return user;
-     }
-     
-     public void setUser(User user) {
-         this.user = user;
-     }
-    
+
+    private String licensePlate;
+    private String parkingSpot;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_KEY")
+    private User user;
+
+    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Photo photo;
+
+    public String getLicensePlate() {
+        return licensePlate;
+    }
+
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+
+    public String getParkingSpot() {
+        return parkingSpot;
+    }
+
+    public void setParkingSpot(String parkingSpot) {
+        this.parkingSpot = parkingSpot;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Integer getId() {
         return id;
@@ -66,6 +70,18 @@ public class Car implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Photo photo) {
+        this.photo = photo;
     }
 
     @Override
@@ -92,5 +108,5 @@ public class Car implements Serializable {
     public String toString() {
         return "com.park.parkinglot.entity.Car[ id=" + id + " ]";
     }
-    
+
 }

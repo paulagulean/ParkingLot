@@ -40,6 +40,10 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private Collection<Car> cars;
 
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getUsername() {
         return username;
     }
